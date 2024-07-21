@@ -1,6 +1,7 @@
 import { useState } from "react"
 import payslipData from '../mockData'
 import { Payslip } from "../types"
+import { Link } from "react-router-dom"
 
 const PayslipList = () => {
     const [payslips, setPayslips] = useState<Payslip[]>(payslipData)
@@ -16,7 +17,9 @@ const PayslipList = () => {
             <ul>
                 {payslips.map((paylsip => (
                     <li key={paylsip.id}>
-                        {formatDate(paylsip.fromDate)} to {formatDate(paylsip.toDate)}
+                        <Link to={`/payslip/${paylsip.id}`}>
+                            {formatDate(paylsip.fromDate)} to {formatDate(paylsip.toDate)}ƒ
+                        </Link>
                     </li>
                 )))}
             </ul>
