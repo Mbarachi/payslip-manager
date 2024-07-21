@@ -1,10 +1,13 @@
-import React from 'react';
-import './App.css';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import PayslipList from './pages/PayslipList';
 
 function App() {
   return (
-    <div>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<PayslipList />} />
+      </Routes>
+    </Router>
   );
 }
 
