@@ -5,6 +5,7 @@ import { Alert, Button, Card, Container } from "react-bootstrap"
 import DownloadIcon from "../components/DownloadIcon"
 import { ArrowLeftCircle } from "lucide-react"
 import { Directory, Encoding, Filesystem } from "@capacitor/filesystem"
+import { Capacitor } from "@capacitor/core"
 import { useState } from "react"
 import { motion } from "framer-motion"
 
