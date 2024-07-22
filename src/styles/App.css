@@ -1,3 +1,9 @@
 body {
     margin: 10px;
 }
+
+.flex-payslip {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
