@@ -66,7 +66,7 @@ const PayslipDetails = () => {
                         <h3>Payslip Details</h3>
                         <p>ID: {payslip.id}</p>
                         <p>Period: {formatDate(payslip.fromDate)} to {formatDate(payslip.toDate)}</p>
-                        <Button size="sm" variant="dark" onClick={downloadPayslip}>
+                        <Button style={{ marginTop: "0.7rem" }} size="sm" variant="dark" onClick={downloadPayslip}>
                             Download Payslip
                             <DownloadIcon />
                         </Button>
