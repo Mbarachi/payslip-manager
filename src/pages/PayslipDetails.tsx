@@ -1,13 +1,15 @@
 import { useNavigate, useParams } from "react-router-dom"
 import payslipData from '../mockData'
 import moment from "moment"
-import { Button, Card, Container } from "react-bootstrap"
+import { Alert, Button, Card, Container } from "react-bootstrap"
 import DownloadIcon from "../components/DownloadIcon"
 import { ArrowLeftCircle } from "lucide-react"
-import { Directory, Filesystem } from "@capacitor/filesystem"
+import { Directory, Encoding, Filesystem } from "@capacitor/filesystem"
+import { useState } from "react"
 
 const PayslipDetails = () => {
     const { id } = useParams<{ id: string }>()
+    const [showAlert, setShowAlert] = useState(false);
 
     const navigate = useNavigate()
 
@@ -23,23 +25,27 @@ const PayslipDetails = () => {
     }
 
     const downloadPayslip = async () => {
-        const response = await fetch(payslip.file);
-        const blob = await response.blob();
-        const reader = new FileReader();
-        reader.onloadend = async () => {
-            const base64data = reader.result;
+        try {
             await Filesystem.writeFile({
                 path: `payslip-${payslip.id}.pdf`,
-                data: base64data as string,
+                data: 'This is a test',
                 directory: Directory.Documents,
+                encoding: Encoding.UTF8,
             });
-            alert('File downloaded');
-        };
-        reader.readAsDataURL(blob);
+            setShowAlert(true);
+            setTimeout(() => setShowAlert(false), 3000);
+        } catch (error) {
+            console.error('Error downloading payslip:', error);
+        }
     };
 
     return (
         <Container style={{ marginTop: '1rem' }}>
+            {showAlert &&
+                <Alert variant="success" onClose={() => setShowAlert(false)} dismissible style={{ marginTop: "1rem" }}>
+                    Payslip downloaded successfully!
+                </Alert>
+            }
             <ArrowLeftCircle style={{ marginBottom: "0.5rem" }} onClick={() => navigate(-1)} />
             <Card>
                 <Card.Body>
