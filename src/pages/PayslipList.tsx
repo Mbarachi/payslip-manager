@@ -18,7 +18,7 @@ const PayslipList = () => {
 
     return (
         <Container style={{ marginTop: '1rem' }}>
-            <h1>Payslip List</h1>
+            <h3>Payslip List</h3>
             <ListGroup>
                 {payslips.map((payslip => (
                     <ListGroup.Item variant="primary" key={payslip.id} action onClick={() => navigate(`/payslip/${payslip.id}`)}>

@@ -1,11 +1,14 @@
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import payslipData from '../mockData'
 import moment from "moment"
 import { Button, Card, Container } from "react-bootstrap"
 import DownloadIcon from "../components/DownloadIcon"
+import { ArrowLeftCircle } from "lucide-react"
 
 const PayslipDetails = () => {
     const { id } = useParams<{ id: string }>()
+
+    const navigate = useNavigate()
 
     const payslip = payslipData.find(slip => slip.id === id)
 
@@ -20,9 +23,10 @@ const PayslipDetails = () => {
 
     return (
         <Container style={{ marginTop: '1rem' }}>
+            <ArrowLeftCircle style={{ marginBottom: "0.5rem" }} onClick={() => navigate(-1)} />
             <Card>
                 <Card.Body>
-                    <h1>Payslip Details</h1>
+                    <h3>Payslip Details</h3>
                     <p>ID: {payslip.id}</p>
                     <p>Period: {formatDate(payslip.fromDate)} to {formatDate(payslip.toDate)}</p>
                     <Button className="flex-btn">
