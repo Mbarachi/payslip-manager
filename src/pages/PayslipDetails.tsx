@@ -6,6 +6,7 @@ import DownloadIcon from "../components/DownloadIcon"
 import { ArrowLeftCircle } from "lucide-react"
 import { Directory, Encoding, Filesystem } from "@capacitor/filesystem"
 import { useState } from "react"
+import { motion } from "framer-motion"
 
 const PayslipDetails = () => {
     const { id } = useParams<{ id: string }>()
@@ -40,25 +41,39 @@ const PayslipDetails = () => {
     };
 
     return (
-        <Container style={{ marginTop: '1rem' }}>
-            {showAlert &&
-                <Alert variant="success" onClose={() => setShowAlert(false)} dismissible style={{ marginTop: "1rem" }}>
-                    Payslip downloaded successfully!
-                </Alert>
-            }
-            <ArrowLeftCircle style={{ marginBottom: "0.5rem" }} onClick={() => navigate(-1)} />
-            <Card>
-                <Card.Body>
-                    <h3>Payslip Details</h3>
-                    <p>ID: {payslip.id}</p>
-                    <p>Period: {formatDate(payslip.fromDate)} to {formatDate(payslip.toDate)}</p>
-                    <Button className="flex-btn" onClick={downloadPayslip}>
-                        Download Payslip
-                        <DownloadIcon />
-                    </Button>
-                </Card.Body>
-            </Card>
-        </Container>
+        <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.5 }}
+        >
+            <Container style={{ marginTop: '1rem' }}>
+                <motion.div
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: showAlert ? 1 : 0, y: showAlert ? 0 : -20 }}
+                    transition={{ duration: 0.5 }}
+                >
+                    {showAlert &&
+                        <Alert variant="success" onClose={() => setShowAlert(false)} dismissible style={{ marginTop: "1rem" }}>
+                            Payslip downloaded successfully!
+                        </Alert>
+                    }
+                </motion.div>
+
+                <ArrowLeftCircle style={{ marginBottom: "0.5rem", cursor: "pointer" }} onClick={() => navigate(-1)} />
+                <Card>
+                    <Card.Body>
+                        <h3>Payslip Details</h3>
+                        <p>ID: {payslip.id}</p>
+                        <p>Period: {formatDate(payslip.fromDate)} to {formatDate(payslip.toDate)}</p>
+                        <Button size="sm" variant="dark" onClick={downloadPayslip}>
+                            Download Payslip
+                            <DownloadIcon />
+                        </Button>
+                    </Card.Body>
+                </Card>
+            </Container>
+        </motion.div>
     )
 }
 
