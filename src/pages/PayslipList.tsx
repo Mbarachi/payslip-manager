@@ -21,7 +21,7 @@ const PayslipList = () => {
             <h1>Payslip List</h1>
             <ListGroup>
                 {payslips.map((payslip => (
-                    <ListGroup.Item key={payslip.id} action onClick={() => navigate(`/payslip/${payslip.id}`)}>
+                    <ListGroup.Item variant="primary" key={payslip.id} action onClick={() => navigate(`/payslip/${payslip.id}`)}>
                         <div className="flex-payslip">
                             <div>
                                 <Receipt style={{ marginRight: "0.5rem" }} />
