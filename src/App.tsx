@@ -4,12 +4,14 @@ import PayslipDetails from './pages/PayslipDetails';
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<PayslipList />} />
-        <Route path="/payslip/:id" element={<PayslipDetails />} />
-      </Routes>
-    </Router>
+    <div style={{ paddingTop: "env(safe-area-inset-top)" }}>
+      <Router>
+        <Routes>
+          <Route path="/" element={<PayslipList />} />
+          <Route path="/payslip/:id" element={<PayslipDetails />} />
+        </Routes>
+      </Router>
+    </div>
   );
 }
 

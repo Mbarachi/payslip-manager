@@ -17,7 +17,7 @@ const PayslipList = () => {
     const navigate = useNavigate()
 
     return (
-        <Container style={{ marginTop: '1rem' }}>
+        <Container>
             <h3>Payslip List</h3>
             <ListGroup>
                 {payslips.map((payslip => (
